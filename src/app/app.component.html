@@ -1,6 +1,14 @@
 <top-bar></top-bar>
+<div>
+    {{weightAverage}}
+</div>
+
+<div>
+    {{calsAverage}}
+</div>
+
 
 <div class="days-list">
-    <app-day-row *ngFor="let data of days" [data]="data">
+    <app-day-row *ngFor="let data of days" [data]="data" (dataChanged)="updateDay($event)">
     </app-day-row>
 </div>

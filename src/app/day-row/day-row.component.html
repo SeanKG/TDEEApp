@@ -2,6 +2,6 @@
       {{data.date}}
   </div>
   <div class="inputs">
-      <input type="number" class="cals" [(ngModel)]="data.cals">
-      <input type="number" class="weight" [(ngModel)]="data.weight">            
+      <input type="number" name="cals" class="cals" [(ngModel)]="data.cals" (ngModelChange)="onChanges($event)">
+      <input type="number" name="weight" class="weight" [(ngModel)]="data.weight"  (ngModelChange)="onChanges($event)">
   </div>

@@ -1,4 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter } from '@angular/core';
 
 import {DayData} from '../day-data';
 
@@ -10,10 +14,21 @@ import {DayData} from '../day-data';
 export class DayRowComponent implements OnInit {
   @Input() data: DayData;
 
+
+
+  @Output() dataChanged = new EventEmitter();
+
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  onChanges() {
+    this.dataChanged.emit(this.data);
+  }
+
+
 
 
 }

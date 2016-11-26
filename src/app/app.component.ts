@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import {DayData} from './day-data';
 
 
@@ -33,6 +33,41 @@ const dayData: DayData[] = [
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnChanges, OnInit {
   days: DayData[] = dayData;
+
+  calsAverage: number;
+  weightAverage: number;
+
+
+
+  ngOnInit() {
+    this.calcAverages();
+  }
+
+  ngOnChanges() {
+    this.calcAverages();
+  }
+
+  calcAverages() {
+    this.weightAverage = this.days.map(day => day.weight)
+                                  .reduce((prev, curr, i) => prev + curr) / this.days.length;
+
+    this.calsAverage = this.days.map(day => day.cals)
+                                  .reduce((prev, curr, i) => prev + curr) / this.days.length;
+
+
+  }
+
+  updateDay(newDay: DayData) {
+    const index = this.days.findIndex(day => day.date === newDay.date);
+
+    this.days[index].cals = newDay.cals;
+    this.days[index].weight = newDay.weight;
+
+    this.calcAverages();
+  }
+
+
+
 }
