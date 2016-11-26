@@ -79,9 +79,13 @@ export class AppComponent implements OnChanges, OnInit {
 
   addDay() {
     console.log('adding day');
-    let{date, cals, weight}  = this.days[this.days.length - 1];
+    let{date}  = this.days[this.days.length - 1];
     date.setDate(date.getDate() - 1);
-    this.days.push({date, cals, weight});
+    this.days.push({
+      date: new Date(date),
+      cals: this.calsAverage,
+      weight: this.weightAverage
+    });
     this.calcAverages();
   }
 
