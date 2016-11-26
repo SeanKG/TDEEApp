@@ -81,20 +81,7 @@ export class AppComponent implements OnChanges, OnInit {
 
 
   calcTDEE() {
-  }
-
-
-  addDay() {
-    console.log('adding day');
-    let{date}  = this.days[this.days.length - 1],
-        {avgDay} = this;
-    date.setDate(date.getDate() - 1);
-    this.days.push({date: new Date(date), cals: avgDay.calsAvg, weight: avgDay.weightAvg});
-    this.calcAverages();
-  }
-
-  calcAverages() {
-    let day = this.days.reduceRight((prev, curr, i, arr) => {
+        let day = this.days.reduceRight((prev, curr, i, arr) => {
       if (i === 0) {
         curr.weightAvg = curr.weight;
         curr.calsAvg = curr.cals;
@@ -113,6 +100,20 @@ export class AppComponent implements OnChanges, OnInit {
     this.avgDay = day;
 
 
+
+  }
+
+
+  addDay() {
+    console.log('adding day');
+    let{date}  = this.days[this.days.length - 1],
+        {avgDay} = this;
+    date.setDate(date.getDate() - 1);
+    this.days.push({date: new Date(date), cals: avgDay.calsAvg, weight: avgDay.weightAvg});
+    this.calcAverages();
+  }
+
+  calcAverages() {
 
   }
 
