@@ -11,4 +11,8 @@
 <div class="days-list">
     <app-day-row *ngFor="let data of days" [data]="data" (dataChanged)="updateDay($event)">
     </app-day-row>
+
+
+
+    <a (click)="addDay()">Add Day</a>
 </div>

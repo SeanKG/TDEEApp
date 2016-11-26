@@ -1,5 +1,5 @@
   <div class="date">
-      {{data.date}}
+      {{data.date | date:'dd'}}
   </div>
   <div class="inputs">
       <input type="number" name="cals" class="cals" [(ngModel)]="data.cals" (ngModelChange)="onChanges($event)">
