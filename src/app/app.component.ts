@@ -55,8 +55,11 @@ const dayData: DayData[] = [
 export class AppComponent implements OnChanges, OnInit {
   days: DayData[] = dayData;
 
-  calsAverage: number;
-  weightAverage: number;
+  // averageCals: number;
+  // averageWeight: number;
+
+
+  avgDay: DayData;
 
   // nextDateToAdd: Date;
 
@@ -77,20 +80,38 @@ export class AppComponent implements OnChanges, OnInit {
   }
 
 
+  calcTDEE() {
+  }
+
+
   addDay() {
     console.log('adding day');
-    let{date, cals, weight}  = this.days[this.days.length - 1];
+    let{date}  = this.days[this.days.length - 1],
+        {avgDay} = this;
     date.setDate(date.getDate() - 1);
-    this.days.push({date, cals, weight});
+    this.days.push({date: new Date(date), cals: avgDay.calsAvg, weight: avgDay.weightAvg});
     this.calcAverages();
   }
 
   calcAverages() {
-    this.weightAverage = this.days.map(day => day.weight)
-                                  .reduce((prev, curr, i) => prev + curr) / this.days.length;
+    let day = this.days.reduceRight((prev, curr, i, arr) => {
+      if (i === 0) {
+        curr.weightAvg = curr.weight;
+        curr.calsAvg = curr.cals;
+        return curr;
+      }
 
-    this.calsAverage = this.days.map(day => day.cals)
-                                  .reduce((prev, curr, i) => prev + curr) / this.days.length;
+      curr.weightAvg = curr.weight + prev.weightAvg / 2;
+      curr.calsAvg = curr.cals + prev.calsAvg / 2;
+
+      console.log(curr);
+
+      return curr;
+
+    });
+
+    this.avgDay = day;
+
 
 
   }
