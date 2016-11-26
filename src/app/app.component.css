@@ -1,0 +1,11 @@
+
+.days-list{
+    margin-top: 50px;    
+}
+
+app-day-row{
+    display: flex;
+}
+
+
+
