@@ -9,7 +9,7 @@ const createDate = (dayAdjust: number): Date => {
 
   return date;
 
-}
+};
 
 const dayData: DayData[] = [
   {
