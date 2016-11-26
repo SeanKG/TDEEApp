@@ -1,5 +1,5 @@
 export class DayData {
-    date:number;
-    cals:number;
-    weight:number;
+    date: Date;
+    cals?: number;
+    weight?: number;
 }
