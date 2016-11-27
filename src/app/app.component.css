@@ -1,6 +1,19 @@
 
+.app-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.top-bar,
+.bottom-bar{
+    height: 56px;
+    background: #efefef;
+}
+
 .days-list{
-    margin-top: 50px;    
+    flex: 1;
+    overflow-y: auto;
 }
 
 app-day-row{
@@ -8,4 +21,9 @@ app-day-row{
 }
 
 
-
+/*button{
+    position:fixed;
+    bottom:o;
+    left:0;
+    right:0;
+}*/

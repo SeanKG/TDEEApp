@@ -50,3 +50,12 @@ table {
 
 
 input:focus{outline:none;}
+
+
+html,
+body,
+app-root{
+    height: 100%;
+}
+
+

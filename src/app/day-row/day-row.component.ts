@@ -2,7 +2,11 @@ import { Component,
   OnInit,
   Input,
   Output,
-  EventEmitter } from '@angular/core';
+  EventEmitter,
+  AfterViewInit,
+  ElementRef,
+  ViewChild
+ } from '@angular/core';
 
 import {DayData} from '../day-data';
 
@@ -11,8 +15,10 @@ import {DayData} from '../day-data';
   templateUrl: './day-row.component.html',
   styleUrls: ['./day-row.component.css']
 })
-export class DayRowComponent implements OnInit {
+export class DayRowComponent implements OnInit, AfterViewInit {
   @Input() data: DayData;
+
+  @ViewChild('focusTarget') focusTarget: ElementRef;
 
 
 
@@ -22,10 +28,20 @@ export class DayRowComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // console.log(arguments);
   }
 
   onChanges() {
     this.dataChanged.emit(this.data);
+  }
+
+  ngAfterViewInit() {
+    // viewChild is set after the view has been initialized
+    if (this.data.isNew) {
+      console.log(this.focusTarget);
+      this.focusTarget.nativeElement.scrollIntoView();
+      this.focusTarget.nativeElement.focus();
+    }
   }
 
 

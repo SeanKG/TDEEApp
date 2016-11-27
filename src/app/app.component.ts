@@ -84,7 +84,8 @@ export class AppComponent implements OnChanges, OnInit {
     this.days.push({
       date: new Date(date),
       cals: this.calsAverage,
-      weight: this.weightAverage
+      weight: this.weightAverage,
+      isNew: true
     });
     this.calcAverages();
   }
