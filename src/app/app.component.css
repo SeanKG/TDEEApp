@@ -20,6 +20,14 @@ app-day-row{
     display: flex;
 }
 
+.add-item{
+    width: 100%;
+    height: 100%;
+    background: #49E;
+    border: none;
+    color: #fff;
+    font-size: 23px;
+}
 
 /*button{
     position:fixed;

@@ -2,11 +2,13 @@
 <div class="app-container">
     <div class="top-bar">
         <div>
-            {{weightAverage}}
+            cals offset avg: {{calsOffsetAvg}}
         </div>
-
         <div>
-            {{calsAverage}}
+            cals avg: {{calsAverage}}
+        </div>
+        <div>
+            weight change avg: {{weightChangeAvg}}
         </div>
     </div>
     <div class="days-list">
@@ -16,6 +18,6 @@
         </app-day-row>
     </div>
     <div class="bottom-bar">
-        <button (click)="addDay()">Add Day</button>
+        <button class="add-item" (click)="addDay()">Add Day</button>
     </div>
 </div>

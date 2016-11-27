@@ -38,9 +38,11 @@ export class DayRowComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // viewChild is set after the view has been initialized
     if (this.data.isNew) {
-      console.log(this.focusTarget);
-      this.focusTarget.nativeElement.scrollIntoView();
-      this.focusTarget.nativeElement.focus();
+      setTimeout(() => {
+        console.log(this.focusTarget);
+        this.focusTarget.nativeElement.scrollIntoView();
+        this.focusTarget.nativeElement.focus();
+      }, 100);
     }
   }
 
