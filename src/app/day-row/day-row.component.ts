@@ -44,7 +44,7 @@ export class DayRowComponent implements OnInit, AfterViewInit {
         console.log(this.focusTarget);
         el.scrollIntoView();
         el.select();
-      }, 250);
+      }, 500);
     }
   }
 
