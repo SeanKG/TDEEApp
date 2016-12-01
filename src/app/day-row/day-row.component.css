@@ -1,14 +1,11 @@
-.date, input[type=number]{
-    font-family: arial;
-
-}
 
 .date{
-    padding: 30px;
+    padding: 16px;
     color: #4DA;
-    font-size: 50px;
+    font-size: 24px;
     font-weight: bold;
     flex-grow: 0;
+    line-height: 40px;
 }
 
 .inputs{
@@ -17,15 +14,17 @@
 }
 
 input[type=number]{
+    background: none;
     width: 50%;
-    font-size: 20px;
-    padding: 10px;
+    font-size: 24px;
+    padding: 8px;
     text-align: center;
     border: none;
     border-bottom: 1px solid #dfdfdf;
     margin-left: 10px;
-    color:#777;
-
+    color: #777;
+    margin: 8px;
+    line-height: 40px;
 }
 
 input[type=number]:focus{

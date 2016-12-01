@@ -21,7 +21,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
+	font-family: arial;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -50,3 +50,12 @@ table {
 
 
 input:focus{outline:none;}
+
+
+html,
+body,
+app-root{
+    height: 100%;
+}
+
+

@@ -1,18 +1,43 @@
-<top-bar></top-bar>
-<div>
-    {{weightAverage}}
-</div>
-
-<div>
-    {{calsAverage}}
-</div>
-
-
-<div class="days-list">
-    <app-day-row *ngFor="let data of days" [data]="data" (dataChanged)="updateDay($event)">
-    </app-day-row>
-
-
-
-    <a (click)="addDay()">Add Day</a>
+<!--<top-bar></top-bar>-->
+<div class="app-container">
+    <div class="top-bar">
+        <div class="top-bar--title top-bar--date-title">
+            DAY
+        </div>
+        <div class="top-bar--title top-bar--input-title">
+            Calories
+        </div>
+        <div class="top-bar--title top-bar--input-title">
+            Weight (lbs)
+        </div>
+    </div>
+    <div class="days-list">
+        <app-day-row *ngFor="let day of days" 
+                    [data]="day" 
+                    (dataChanged)="updateDay($event)">
+        </app-day-row>
+    </div>
+    <div class="bottom-bar">
+        <div class="bottom-bar--stats">
+            <div class="bottom-bar--stat">  
+                <small>average calories</small>
+                <div>
+                    {{calsAverage | number:'1.0-0'}}
+                </div>
+            </div>
+            <div class="bottom-bar--stat">
+                <small>average calorie offset</small>
+                <div>
+                    {{calsOffsetAvg | number:'1.0-0'}}
+                </div>
+            </div>
+            <div class="bottom-bar--stat">  
+                <small>average weight change</small>
+                <div>
+                    {{weightChangeAvg | number:'1.0-2'}}
+                </div>
+            </div>
+        </div>
+        <button class="bottom-bar--add-item" (click)="addDay()">Add Day</button>
+    </div>
 </div>
