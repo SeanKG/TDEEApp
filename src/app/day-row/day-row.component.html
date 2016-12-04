@@ -1,17 +1,18 @@
-  <div class="date">
-      {{data.date | date:'dd'}}
-  </div>
-  <div class="inputs">
-      <input type="number"
-            #focusTarget 
-            name="cals" 
-            class="cals" 
-            [(ngModel)]="data.cals" 
-            (ngModelChange)="onChanges($event)">
- 
-      <input type="number" 
-            name="weight" 
-            class="weight" 
-            [(ngModel)]="data.weight"  
-            (ngModelChange)="onChanges($event)">
-  </div>
+
+<div class="date">
+    {{data.date | date:'dd'}}
+</div>
+<div class="inputs">
+    <input type="number"
+        #focusTarget 
+        name="cals" 
+        class="cals" 
+        [(ngModel)]="data.cals" 
+        (ngModelChange)="onChanges($event)">
+
+    <input type="number" 
+        name="weight" 
+        class="weight" 
+        [(ngModel)]="data.weight"  
+        (ngModelChange)="onChanges($event)">
+</div>
