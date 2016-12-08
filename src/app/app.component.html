@@ -2,7 +2,7 @@
 <div class="app-container">
     <app-top-bar></app-top-bar>
     <div class="days-list">
-        <app-day-row *ngFor="let day of days" 
+        <app-day-row *ngFor="let day of days$ | async" 
                     [data]="day" 
                     (dataChanged)="updateDay($event)">
         </app-day-row>
