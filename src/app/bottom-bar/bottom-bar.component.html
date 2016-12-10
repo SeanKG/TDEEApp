@@ -1,0 +1,21 @@
+<div class="bottom-bar--stats">
+    <div class="bottom-bar--stat">  
+        <small>average calories</small>
+        <div>
+            {{calsAverage | number:'1.0-0'}}
+        </div>
+    </div>
+    <div class="bottom-bar--stat">
+        <small>average calorie offset</small>
+        <div>
+            {{calsOffsetAvg | number:'1.0-0'}}
+        </div>
+    </div>
+    <div class="bottom-bar--stat">  
+        <small>average weight change</small>
+        <div>
+            {{weightChangeAvg | number:'1.0-2'}}
+        </div>
+    </div>
+</div>
+<button class="bottom-bar--add-item" (click)="addDay()">Add Day</button>
