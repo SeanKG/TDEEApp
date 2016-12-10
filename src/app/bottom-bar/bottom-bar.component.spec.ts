@@ -25,4 +25,10 @@ describe('BottomBarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  // it('should have a value for calsAverage', () => {
+  //   expect(component.calsAverage === 0).toBeTruthy();
+  // });
+
 });

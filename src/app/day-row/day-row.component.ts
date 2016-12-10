@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { Component,
   OnInit,
   Input,
@@ -40,11 +41,12 @@ export class DayRowComponent implements OnInit, AfterViewInit {
     const el = this.focusTarget.nativeElement;
     if (this.data.isNew) {
       el.focus();
-      setTimeout(() => {
-        console.log(this.focusTarget);
-        el.scrollIntoView();
-        el.select();
-      }, 500);
+      Observable.interval(500).take(1)
+        .subscribe(() => {
+          console.log(this.focusTarget);
+          el.scrollIntoView();
+          el.select();
+        });
     }
   }
 

@@ -7,12 +7,12 @@
         #focusTarget 
         name="cals" 
         class="cals" 
-        [(ngModel)]="data.cals" 
-        (ngModelChange)="onChanges($event)">
+        [value]="data.cals" 
+        (change)="onChanges($event)">
 
     <input type="number" 
         name="weight" 
         class="weight" 
-        [(ngModel)]="data.weight"  
-        (ngModelChange)="onChanges($event)">
+        [value]="data.weight"  
+        (change)="onChanges($event)">
 </div>
