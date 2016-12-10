@@ -1,46 +1,36 @@
+import { AppState } from './types';
+import { Observable, Subject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import {DayData, testData} from './day-data';
-
-import * as Rx from 'rxjs/Rx';
-
-
-export interface AppState {
-  calsAverage?: number;
-  weightAverage?: number;
-  weightChangeAvg?: number;
-  calsOffsetAvg?: number;
-  days?: DayData[];
-
-}
 
 @Injectable()
 export class AppSrv {
 
-  appState$ = new Rx.Subject<AppState>();
+  appState$ = new Subject<AppState>();
 
-  appState: AppState = {
-    calsAverage: 0,
-    weightAverage: 0,
-    weightChangeAvg: 0,
-    calsOffsetAvg: 0,
-    days: []
-  };
+  appState: AppState;
 
   constructor() {
-    this.appState.days = testData;
+    this.appState = {
+      days: testData,
+      stats: {
+        calsAverage: 0,
+        weightAverage: 0,
+        weightChangeAvg: 0,
+        calsOffsetAvg: 0
+      }
+    };
+    Observable.interval(500).take(1).subscribe((d) => {
+      this.calcAverages();
+    });
   }
 
-  start() {
-    // this.dispatchChange();
-    this.calcAverages();
-  }
 
   dispatchChange() {
     this.appState$.next(this.appState);
   }
 
   addDay() {
-    console.log('adding day');
     let lastDay = this.appState.days[this.appState.days.length - 1];
     let{date}  = lastDay,
       {days} = this.appState;
@@ -56,21 +46,15 @@ export class AppSrv {
 
   updateDay(newDay: DayData) {
     const index = this.appState.days.findIndex(day => day.date === newDay.date);
-    // let { date, cals, weight } = newDay;
     this.appState.days[index].cals = newDay.cals;
     this.appState.days[index].weight = newDay.weight;
-    // this.appState.days[index] = {
-    //   date: new Date(date),
-    //   cals,
-    //   weight
-    // };
     this.calcAverages();
   }
 
   calcAverages() {
 
     const addReducer = (prev, curr, i, arr) => prev + curr;
-    const avg = (arr: number[] = []) => arr.reduce(addReducer) / arr.length;
+    const avg = (arr: number[] = []) => arr.reduce(addReducer, 0) / arr.length;
 
     const weights = this.appState.days.map(day => day.weight);
     const changes: number[] = [];
@@ -86,10 +70,10 @@ export class AppSrv {
     console.log('changes', changes);
     console.log('offsets', offsets);
 
-    this.appState.weightChangeAvg = avg(changes);
-    this.appState.calsOffsetAvg = this.appState.weightChangeAvg * 3500;
-    this.appState.weightAverage = avg(weights);
-    this.appState.calsAverage = avg(this.appState.days.map(day => day.cals));
+    this.appState.stats.weightChangeAvg = avg(changes);
+    this.appState.stats.calsOffsetAvg = this.appState.stats.weightChangeAvg * 3500;
+    this.appState.stats.weightAverage = avg(weights);
+    this.appState.stats.calsAverage = avg(this.appState.days.map(day => day.cals));
 
     this.dispatchChange();
   }

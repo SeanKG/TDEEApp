@@ -1,9 +1,9 @@
+import { AppState, ChangeStats } from './types';
+import { Observable } from 'rxjs/Rx';
 import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { DayData } from './day-data';
 
-import { AppSrv, AppState } from './app.service';
-
-import * as Rx from 'rxjs/Rx';
+import { AppSrv } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +12,10 @@ import * as Rx from 'rxjs/Rx';
 })
 export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
-  appState$: Rx.Observable<AppState>;
+  appState$: Observable<AppState>;
 
-  days$: Rx.Observable<DayData[]>;
-
-  calsAverage: number;
-  weightAverage: number;
-  weightChangeAvg: number;
-  calsOffsetAvg: number;
+  days$: Observable<DayData[]>;
+  stats: ChangeStats = {};
 
   constructor(private appSrv: AppSrv) {
   }
@@ -27,15 +23,16 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   ngOnInit() {
     this.appState$ = this.appSrv.appState$.asObservable();
-
     let { appState$ } = this;
 
-    appState$.subscribe(state => {
-      this.calsAverage = state.calsAverage;
-      this.weightAverage = state.weightAverage;
-      this.weightChangeAvg = state.weightChangeAvg;
-      this.calsOffsetAvg = state.calsOffsetAvg;
-    });
+    // appState$.subscribe();
+
+    appState$
+      .map(s => s.stats)
+      .distinctUntilChanged()
+      .subscribe(stats => this.stats = stats);
+
+    // this.stats$.subscribe(console.log);
 
     this.days$ = appState$
                   .map(d => d.days)
@@ -47,14 +44,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //           .distinctUntilChanged()
     //           .subscribe(console.log);
 
-    this.appSrv.calcAverages();
+    // this.appSrv.calcAverages();
 
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.appSrv.start();
-    }, 200);
   }
 
   ngAfterViewChecked() {

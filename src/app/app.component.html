@@ -7,9 +7,7 @@
                     (dataChanged)="updateDay($event)">
         </app-day-row>
     </div>
-    <app-bottom-bar [calsAverage]="calsAverage" 
-                    [calsOffsetAvg]="calsOffsetAvg" 
-                    [weightChangeAvg]="weightChangeAvg"
+    <app-bottom-bar [stats]="stats"
                     (onAddDay)="addDay()">
     </app-bottom-bar>
 </div>

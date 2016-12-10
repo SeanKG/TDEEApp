@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeStats } from '../types';
 
 @Component({
   selector: 'app-bottom-bar',
@@ -9,14 +10,16 @@ export class BottomBarComponent implements OnInit {
 
   @Output() onAddDay = new EventEmitter();
 
-  @Input() calsAverage: number;
-  @Input() calsOffsetAvg: number;
-  @Input() weightChangeAvg: number;
+  @Input() stats: ChangeStats;
 
   constructor() { }
 
   ngOnInit() {
   }
+
+  // ngOnChanges() {
+  //   debugger;
+  // }
 
   @Output() addDay() {
     this.onAddDay.emit();
