@@ -21,16 +21,11 @@ export class DaysService {
     let rows: DayData[] = [];
     let today = new Date();
     let lastDay: DayData;
+    if (!userData.length) { return []; };
     userData.forEach(data => {
       while (!this.compareDates(today, data.date)) {
         let newDay: DayData;
-        if (!lastDay) {
-          lastDay = {
-            weight: null,
-            cals: null,
-            date: new Date(today)
-          };
-        }
+        if (!lastDay) { lastDay = data; }
         newDay = {
           weight: lastDay.weight,
           cals: lastDay.cals,

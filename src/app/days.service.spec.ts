@@ -41,11 +41,13 @@ describe('DaysService', () => {
     ];
 
     let expectedData: DayData[]  = [
-      { weight: null,
-        cals: null,
+      {
+        weight: 191.2,
+        cals: 1750,
         date: createDate(0)
       },
-      { weight: 191.2,
+      {
+        weight: 191.2,
         cals: 1750,
         date: createDate(-1)
       },
