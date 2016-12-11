@@ -20,23 +20,24 @@ describe('DaysService', () => {
     expect(service).toBeTruthy();
     let date1 = new Date(),
         date2 = new Date();
-
         expect(service.compareDates(date1, date2)).toBeTruthy();
+        date1.setDate(date1.getDate() - 1);
+        expect(service.compareDates(date1, date2)).toBeFalsy();
   }));
 
   it('Should fill in the blanks', inject([DaysService], (service: DaysService) => {
     let userData: DayData[]  = [
       { weight: 191.2,
         cals: 1750,
-        date: createDate(-1)
+        date: createDate(-1) // today - 1 day
       },
       { weight: 189.4,
         cals: 1750,
-        date: createDate(-2)
+        date: createDate(-2) // today -2 days
       },
       { weight: 189.9,
         cals: 1750,
-        date: createDate(-5)
+        date: createDate(-5) // today - 5 days
       }
     ];
 
@@ -44,28 +45,28 @@ describe('DaysService', () => {
       {
         weight: 191.2,
         cals: 1750,
-        date: createDate(0)
+        date: createDate(0) // today
       },
       {
         weight: 191.2,
         cals: 1750,
-        date: createDate(-1)
+        date: createDate(-1) // today - 1 days
       },
       { weight: 189.4,
         cals: 1750,
-        date: createDate(-2)
+        date: createDate(-2) // today - 2 days
       },
       { weight: 189.4,
         cals: 1750,
-        date: createDate(-3)
+        date: createDate(-3) // today - 3 days
       },
       { weight: 189.4,
         cals: 1750,
-        date: createDate(-4)
+        date: createDate(-4) // today - 4 days
       },
       { weight: 189.9,
         cals: 1750,
-        date: createDate(-5)
+        date: createDate(-5) // today - 5 days
       }
     ];
 

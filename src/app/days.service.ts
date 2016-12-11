@@ -1,5 +1,8 @@
+import { MetadataOverride } from '@angular/core/testing';
+import { fdatasync, fdatasyncSync } from 'fs';
+import { ArrayType } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
-import {DayData, testData} from './day-data';
+import {DayData} from './day-data';
 
 export const dateString = (date: Date) => `${date.getDate()}:${date.getMonth()}:${date.getFullYear()}`;
 
@@ -17,12 +20,24 @@ export class DaysService {
   getDaysLogs() {
   }
 
+
+
+  /* 
+    Takes data that may have missings days in it and returns data
+    with the blanks filled in based on the existing data.
+    Covers the current date back to the first logged day.
+  */
   makeDaysRows(userData: DayData[]) {
     let rows: DayData[] = [];
     let today = new Date();
     let lastDay: DayData;
     if (!userData.length) { return []; };
+
+    // Loop through the the exsting logs
     userData.forEach(data => {
+      // While the current day does not match the next data point,
+      // add days based on the last last data point is applicable,
+      // otherwise the current one. 
       while (!this.compareDates(today, data.date)) {
         let newDay: DayData;
         if (!lastDay) { lastDay = data; }
