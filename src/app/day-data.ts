@@ -5,7 +5,7 @@ export class DayData {
     isNew?: boolean = false;
 }
 
-const createDate = (dayAdjust: number): Date => {
+export const createDate = (dayAdjust: number): Date => {
   const date = new Date();
 
   date.setDate(date.getDate() + dayAdjust);

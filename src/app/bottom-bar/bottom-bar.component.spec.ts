@@ -22,9 +22,9 @@ describe('BottomBarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 
 
   // it('should have a value for calsAverage', () => {

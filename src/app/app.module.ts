@@ -1,3 +1,4 @@
+import { DaysService } from './days.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,7 @@ import { AppSrv } from './app.service';
     FormsModule,
     HttpModule
   ],
-  providers: [AppSrv],
+  providers: [AppSrv, DaysService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

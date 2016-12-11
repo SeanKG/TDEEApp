@@ -11,16 +11,16 @@ export class AppSrv {
   appState: AppState;
 
   constructor() {
-    this.appState = {
-      days: testData,
-      stats: {
-        calsAverage: 0,
-        weightAverage: 0,
-        weightChangeAvg: 0,
-        calsOffsetAvg: 0
-      }
-    };
     Observable.interval(500).take(1).subscribe((d) => {
+      this.appState = {
+        days: testData,
+        stats: {
+          calsAverage: 0,
+          weightAverage: 0,
+          weightChangeAvg: 0,
+          calsOffsetAvg: 0
+        }
+      };
       this.calcAverages();
     });
   }
