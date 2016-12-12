@@ -1,3 +1,4 @@
+import { DaysService } from './days.service';
 import { AppState } from './types';
 import { Observable, Subject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
@@ -10,10 +11,10 @@ export class AppSrv {
 
   appState: AppState;
 
-  constructor() {
+  constructor(daysSrv: DaysService) {
     Observable.interval(500).take(1).subscribe((d) => {
       this.appState = {
-        days: testData,
+        days: daysSrv.makeDaysRows(testData),
         stats: {
           calsAverage: 0,
           weightAverage: 0,

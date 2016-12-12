@@ -1,12 +1,13 @@
+import { DaysService } from './days.service';
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { AppSrv } from './app.service';
 
-describe('DaysService', () => {
+describe('AppService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AppSrv]
+      providers: [AppSrv, DaysService]
     });
   });
 

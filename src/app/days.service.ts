@@ -1,6 +1,3 @@
-import { MetadataOverride } from '@angular/core/testing';
-import { fdatasync, fdatasyncSync } from 'fs';
-import { ArrayType } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import {DayData} from './day-data';
 
@@ -10,17 +7,14 @@ export const dayString = (day: DayData) => `${day.weight}:
                                             ${day.cals}:
                                             ${dateString(day.date)}`;
 
-
-
 @Injectable()
 export class DaysService {
 
-  constructor() { }
+  constructor() {
+   }
 
-  getDaysLogs() {
-  }
-
-
+  // getDaysLogs() {
+  // }
 
   /* 
     Takes data that may have missings days in it and returns data
