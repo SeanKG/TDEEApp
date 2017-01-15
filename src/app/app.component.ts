@@ -5,6 +5,8 @@ import { DayData } from './day-data';
 
 import { AppSrv } from './app.service';
 
+import { AngularFire, AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,7 +19,23 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   days$: Observable<DayData[]>;
   stats: ChangeStats = {};
 
-  constructor(private appSrv: AppSrv) {
+  constructor(private appSrv: AppSrv, af: AngularFire) {
+
+
+    af.auth.subscribe(auth => {
+      console.log(auth);
+      if (!auth) {
+        af.auth.login({
+          method: AuthMethods.Popup,
+          provider: AuthProviders.Google
+        }).then((r) => {
+          console.log(r);
+        });
+      }
+    });
+
+
+
   }
 
 

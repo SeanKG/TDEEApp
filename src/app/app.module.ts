@@ -11,6 +11,17 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
 import { AppSrv } from './app.service';
 
+import { AngularFireModule } from 'angularfire2';
+
+// Must export the config
+export const firebaseConfig = {
+    apiKey: 'AIzaSyAS6fyQAl6T9KYSSzqSX1FzMbhXGEHzJG0',
+    authDomain: 'tdeeapp.firebaseapp.com',
+    databaseURL: 'https://tdeeapp.firebaseio.com',
+    storageBucket: 'tdeeapp.appspot.com',
+    messagingSenderId: '387424323405'
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +32,8 @@ import { AppSrv } from './app.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [AppSrv, DaysService],
   bootstrap: [AppComponent]
