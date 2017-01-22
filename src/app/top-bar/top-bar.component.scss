@@ -1,0 +1,46 @@
+
+@import '../_settings.scss';
+
+.top-bar{
+
+    &--welcome {
+        display: flex;
+        line-height: 56px;
+        font-size: 24px;
+        color: #888;
+        padding: 0 24px;
+    }
+
+    &--name {
+        flex: 1;
+    }
+
+    &--logout {
+        color: $app-color;
+
+    }
+
+    &--headings {
+        display: flex;
+    }
+
+    &--title{
+        padding: 8px 0;
+        text-align: center;
+        font-size: 16px;
+        line-height: 24px;
+        color: #ccc;
+    }
+
+    &--date-title{
+        width: 58.7px;
+        font-weight: bold;
+    }
+
+    &--input-title{
+        flex: 1;
+        margin: 0 8px;
+    }
+
+}
+

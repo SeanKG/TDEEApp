@@ -1,4 +1,6 @@
 
+@import '../_settings.scss';
+
 .bottom-bar{
     
     &--stats{
@@ -17,13 +19,13 @@
         text-align: center;
         font-size: 16px;
         line-height:  24px;
-        color: #4da;
+        color: $app-color;
     }
 
     &--add-item{
         height: 56px;
         width: 100%;
-        background: #4da;
+        background: $app-color;
         border: none;
         color: #fff;
         font-size: 23px;

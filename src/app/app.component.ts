@@ -5,12 +5,12 @@ import { DayData } from './day-data';
 
 import { AppSrv } from './app.service';
 
-import { AngularFire, AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods, FirebaseAuthState } from 'angularfire2';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
@@ -19,23 +19,38 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   days$: Observable<DayData[]>;
   stats: ChangeStats = {};
 
-  constructor(private appSrv: AppSrv, af: AngularFire) {
+  menuIsOpen: boolean = false;
+
+  auth: FirebaseAuthState;
+
+  displayName: string;
+
+  constructor(private appSrv: AppSrv, private af: AngularFire) {
 
 
     af.auth.subscribe(auth => {
       console.log(auth);
-      if (!auth) {
-        af.auth.login({
-          method: AuthMethods.Popup,
-          provider: AuthProviders.Google
-        }).then((r) => {
-          console.log(r);
-        });
+      this.auth = auth;
+
+      if (auth) {
+        const name = auth.auth.displayName.split(' ')[0];
+        this.displayName = name ? name : '';
+
       }
     });
+  }
 
+  logout() {
+    this.af.auth.logout();
+  }
 
-
+  login() {
+    this.af.auth.login({
+      method: AuthMethods.Popup,
+      provider: AuthProviders.Google
+    }).then((r) => {
+      console.log(r);
+    });
   }
 
 

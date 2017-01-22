@@ -1,6 +1,28 @@
 <!--<top-bar></top-bar>-->
 <div class="app-container">
-    <app-top-bar></app-top-bar>
+
+    <app-login *ngIf="!auth"
+                (onLogin)="login()"></app-login>
+
+    <!--<app-sidebar [isOpen]="menuIsOpen"
+                [auth]="auth"
+                (onClose)="menuIsOpen = false">
+    </app-sidebar>-->
+
+
+    <!--<div class="app-title">
+        <a class="app-title--menu-icon" (click)="menuIsOpen = true">
+            M
+        </a>
+        <div class="app-title--title">
+            TDEE Calculator
+        </div>
+    </div>-->
+
+
+    <app-top-bar [name]="displayName"
+                    (onLogout)="logout()"></app-top-bar>
+
     <div class="days-list">
         <app-day-row *ngFor="let day of days$ | async" 
                     [data]="day" 

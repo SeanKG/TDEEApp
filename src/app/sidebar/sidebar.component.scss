@@ -1,0 +1,66 @@
+@import '../_settings.scss';
+
+.backdrop {
+    display: none;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+
+    &.is-open {
+        display: block;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.2);
+    }
+}
+
+.sidebar {
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+
+    transition: left 200ms ease-out;
+    left:-80%;
+
+    &.is-open {
+        left: 0;
+    }
+
+    &--top {
+        line-height: 56px;
+        font-size: 24px;
+        color: #888;
+        display: flex;
+    }
+
+    &--top-icon {
+        text-align: center;
+        padding: 0 16px;
+        color: $app-color;
+        display: block;
+    }
+
+    &--top-text {
+        padding-left: 8px;
+        flex: 1;
+    }
+
+
+    &--body {
+        padding-top: 16px;
+    }
+
+    
+
+}
+
+
+

@@ -1,0 +1,56 @@
+@import './_settings.scss';
+
+
+.app-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.app-title {
+    display: flex;
+    color: #999;
+    line-height: 56px;
+    font-size: 24px;
+
+    &--menu-icon {
+        text-align: center;
+        padding: 0 16px;
+        color: $app-color;
+        display: block;
+
+    }
+
+    &--title {
+        padding-left: 8px;
+        flex: 1;
+    }
+
+}
+
+
+
+
+app-top-bar,
+app-bottom-bar{
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background: #fff;
+}
+
+// app-top-bar{
+//     display: flex;
+// }
+
+
+/*.bottom-bar{
+
+}*/
+app-day-row{
+    display: flex;
+}
+
+.days-list{
+    flex: 1;
+    overflow-y: auto;
+}
+

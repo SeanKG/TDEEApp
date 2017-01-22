@@ -1,0 +1,23 @@
+
+
+<div class="backdrop" 
+      [class.is-open]="isOpen"
+      (click)="close()"></div>
+<div class="sidebar" 
+      [class.is-open]="isOpen">
+
+  <div class="sidebar--top">
+    <a class="sidebar--top-icon"
+          (click)="close()">X</a>
+    <div class="sidebar--top-text"> TDEE Calculator</div>
+  </div>
+  <div class="sidebar--body">
+    <div *ngIf="auth">
+      logged in
+    </div>
+    <div *ngIf="!auth">
+      not logged in
+    </div>
+  </div>
+
+</div>

@@ -12,6 +12,8 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { AppSrv } from './app.service';
 
 import { AngularFireModule } from 'angularfire2';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { LoginComponent } from './login/login.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -27,7 +29,9 @@ export const firebaseConfig = {
     AppComponent,
     TopBarComponent,
     DayRowComponent,
-    BottomBarComponent
+    BottomBarComponent,
+    SidebarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
