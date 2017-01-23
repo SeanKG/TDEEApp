@@ -33,8 +33,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.auth = auth;
 
       if (auth) {
-        const name = auth.auth.displayName.split(' ')[0];
-        this.displayName = name ? name : '';
+        const name = auth.auth.displayName;
+        this.displayName = name ? name.split(' ')[0] : auth.uid;
 
       }
     });
