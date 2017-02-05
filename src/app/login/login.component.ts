@@ -11,6 +11,11 @@ export class LoginComponent implements OnInit {
 
   // @Output() onLogin = new EventEmitter();
 
+  email: string;
+  pass: string;
+
+  errorMsg: string;
+
   constructor(private af: AngularFire) { }
 
   ngOnInit() {
@@ -26,28 +31,40 @@ export class LoginComponent implements OnInit {
   }
 
   signUp() {
-    let cred: EmailPasswordCredentials = {
-      email: prompt('email?'),
-      password: prompt('password?')
-    };
+    if (this.email && this.pass) {
+      let cred: EmailPasswordCredentials = {
+        email: this.email,
+        password: this.pass
+      };
 
-    this.af.auth.createUser(cred)
-      .then(console.log)
-      .catch(console.log);
+      this.af.auth.createUser(cred)
+        .then(console.log)
+        .catch((e) => this.error(e));
+
+    }
 
   }
 
+  error(e: Error) {
+    this.errorMsg = e.message;
+  }
+
   passwordLogin() {
-    let cred: EmailPasswordCredentials = {
-      email: 'seankgraves@gmail.com',
-      password: 'ototnaes1'
-    };
-    this.af.auth.login(cred, {
-      method: AuthMethods.Password,
-      provider: AuthProviders.Password
-    }).then((r) => {
-      console.log(r);
-    }).catch(console.log);
+
+    if (this.email && this.pass) {
+      let cred: EmailPasswordCredentials = {
+        email: this.email,
+        password: this.pass
+      };
+      this.af.auth.login(cred, {
+        method: AuthMethods.Password,
+        provider: AuthProviders.Password
+      })
+      .then(console.log)
+      .catch((e) => this.error(e));
+
+    }
+
   }
 
 }

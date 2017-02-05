@@ -1,23 +1,58 @@
+<!--<md-toolbar>
+</md-toolbar>-->
+  <md-tab-group>
+    <md-tab label="Log In">
+      <md-input-container>
+        <input md-input placeholder="Email" type="email" required [(ngModel)]="email">
+      </md-input-container>
 
-<br />
-<br />
+      <md-input-container>
+        <input md-input placeholder="Password" type="password" required [(ngModel)]="pass">
+      </md-input-container>
 
-<h3 (click)="googleLogin()">
-  Google Login
-</h3>
 
-<br />
-<br />
+      <button md-raised-button 
+              color="primary"
+              (click)="passwordLogin()">Log In!</button>
 
-<h3 (click)="passwordLogin()">
-  Password Login
-</h3>
+      <button md-raised-button (click)="googleLogin()">
+        Google Login
+      </button>
 
-<br />
-<br />
+      <div *ngIf="errorMsg">
+        {{errorMsg}}
+        
+      </div>
 
-<h3 (click)="signUp()">
-  Sign Up
-</h3>
+      <br />
+      <br />
+    </md-tab>
+    <md-tab label="Sign Up">
+      <md-input-container>
+        <input md-input placeholder="Email" type="email" required [(ngModel)]="email">
+      </md-input-container>
+
+      <md-input-container>
+        <input md-input placeholder="Password" type="password" required [(ngModel)]="pass">
+      </md-input-container>
+
+
+      <button md-raised-button 
+              color="primary"
+              (click)="signUp()">Sign Up!</button>
+
+      <div *ngIf="errorMsg">
+        {{errorMsg}}
+        
+      </div>
+
+      <br />
+      <br />
+    </md-tab>
+  </md-tab-group>
+
+
+
+
 
 

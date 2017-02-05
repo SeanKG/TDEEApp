@@ -14,6 +14,11 @@ import { AppSrv } from './app.service';
 import { AngularFireModule } from 'angularfire2';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
+import { MaterialModule } from '@angular/material';
+
+
+
+import 'hammerjs';
 
 // Must export the config
 export const firebaseConfig = {
@@ -37,7 +42,8 @@ export const firebaseConfig = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    MaterialModule.forRoot()
   ],
   providers: [AppSrv, DaysService],
   bootstrap: [AppComponent]

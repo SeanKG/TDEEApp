@@ -1,20 +1,25 @@
 
 
 
-<div class="top-bar--welcome">
-    <div class="top-bar--name">Welcome, {{name}}</div>
-    <div href="" class="top-bar--logout"
-        (click)="logout()">LOGOUT</div>
-</div>
 
-<div class="top-bar--headings">
-    <div class="top-bar--title top-bar--date-title">
-        DAY
-    </div>
-    <div class="top-bar--title top-bar--input-title">
-        Calories
-    </div>
-    <div class="top-bar--title top-bar--input-title">
-        Weight (lbs)
-    </div>
-</div>
+<md-toolbar color="primary">
+        <span>Welcome, {{name}}</span>
+        <span class="top-bar--spacer"></span>
+        <md-icon (click)="logout()">exit_to_app</md-icon>
+
+    <md-toolbar-row>
+        <div class="top-bar--headings">
+            <div class="top-bar--title top-bar--date-title">
+                DAY
+            </div>
+            <div class="top-bar--title top-bar--input-title">
+                Calories
+            </div>
+            <div class="top-bar--title top-bar--input-title">
+                Weight (lbs)
+            </div>
+       </div>
+    </md-toolbar-row>
+
+</md-toolbar>
+
