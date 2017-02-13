@@ -3,6 +3,7 @@ import { AppState } from './types';
 import { Observable, Subject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import {DayData, testData} from './day-data';
+import { AngularFire } from 'angularfire2';
 
 @Injectable()
 export class AppSrv {
@@ -11,7 +12,17 @@ export class AppSrv {
 
   appState: AppState;
 
-  constructor(daysSrv: DaysService) {
+
+
+  constructor(daysSrv: DaysService, private af: AngularFire) {
+    this.af.auth.switchMap((auth) => {
+      return auth ? this.af.database.list(`DayLogs/${auth.uid}`) : Observable.from([]);
+    }).subscribe(data => {
+      if (data) {
+        console.log(data);
+      }
+    });
+
     Observable.interval(500).take(1).subscribe((d) => {
       this.appState = {
         days: daysSrv.makeDaysRows(testData),

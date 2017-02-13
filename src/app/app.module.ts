@@ -19,6 +19,7 @@ import { MaterialModule } from '@angular/material';
 
 
 import 'hammerjs';
+import { EditDayComponent } from './edit-day/edit-day.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -36,7 +37,8 @@ export const firebaseConfig = {
     DayRowComponent,
     BottomBarComponent,
     SidebarComponent,
-    LoginComponent
+    LoginComponent,
+    EditDayComponent
   ],
   imports: [
     BrowserModule,
