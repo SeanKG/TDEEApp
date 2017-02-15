@@ -52,5 +52,15 @@ app-day-row{
 .days-list{
     flex: 1;
     overflow-y: auto;
+
+    &--add-item{
+        height: 56px;
+        width: 100%;
+        background: $app-color;
+        border: none;
+        color: #fff;
+        font-size: 23px;
+    }
+    
 }
 

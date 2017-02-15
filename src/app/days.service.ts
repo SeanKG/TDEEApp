@@ -25,7 +25,13 @@ export class DaysService {
     let rows: DayData[] = [];
     let today = new Date();
     let lastDay: DayData;
-    if (!userData.length) { return []; };
+    if (!userData || !userData.length) {
+      return [{
+        weight: null,
+        cals: null,
+        date: new Date().toISOString()
+      }];
+    };
 
     // Loop through the the exsting logs
     userData.forEach(data => {

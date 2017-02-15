@@ -27,6 +27,8 @@
                     [data]="day" 
                     (dataChanged)="updateDay($event)">
         </app-day-row>
+        <button class="days-list--add-item" (click)="addDay()">Add Day</button>
+
     </div>
     <app-bottom-bar [stats]="stats"
                     (onAddDay)="addDay()">

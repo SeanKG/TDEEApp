@@ -3,7 +3,7 @@ import { AppState } from './types';
 import { Observable, Subject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import {DayData, testData} from './day-data';
-import { AngularFire } from 'angularfire2';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Injectable()
 export class AppSrv {
@@ -12,34 +12,36 @@ export class AppSrv {
 
   appState: AppState;
 
-
+  userDayLogs$: FirebaseListObservable<DayData[]>;
 
   constructor(daysSrv: DaysService, private af: AngularFire) {
-    this.af.auth.switchMap((auth) => {
-      return auth ? this.af.database.list(`DayLogs/${auth.uid}`) : Observable.from([]);
-    }).subscribe(data => {
-      if (data) {
+    this.af.auth
+      .switchMap((auth) => {
+        this.userDayLogs$ = this.af.database.list(`DayLogs/${auth.uid}`);
+        return auth ? this.userDayLogs$ : Observable.from([]);
+      })
+      .subscribe((data: DayData[]) => {
         console.log(data);
-      }
-    });
+        this.appState = {
+          days: daysSrv.makeDaysRows(data),
+          stats: {
+            calsAverage: 0,
+            weightAverage: 0,
+            weightChangeAvg: 0,
+            calsOffsetAvg: 0
+          }
+        };
+        this.calcAverages();
+      });
 
-    Observable.interval(500).take(1).subscribe((d) => {
-      this.appState = {
-        days: daysSrv.makeDaysRows(testData),
-        stats: {
-          calsAverage: 0,
-          weightAverage: 0,
-          weightChangeAvg: 0,
-          calsOffsetAvg: 0
-        }
-      };
-      this.calcAverages();
-    });
+    // Observable.interval(500).take(1).subscribe((d) => {
+    // });
   }
 
   testPushData() {
-    const testItems = this.af.database.list('/testItems');
-    testData.forEach(d => testItems.push(d));
+    if (this.userDayLogs$) {
+      // testData.forEach(d => this.userDayLogs$.push(d));
+    }
     // testItems.push(testData);
   }
 
@@ -83,10 +85,10 @@ export class AppSrv {
       }
     });
 
-    const offsets = changes.map((val, i, arr) => val * 3500);
+    // const offsets = changes.map((val, i, arr) => val * 3500);
 
-    console.log('changes', changes);
-    console.log('offsets', offsets);
+    // console.log('changes', changes);
+    // console.log('offsets', offsets);
 
     this.appState.stats.weightChangeAvg = avg(changes);
     this.appState.stats.calsOffsetAvg = this.appState.stats.weightChangeAvg * 3500;
