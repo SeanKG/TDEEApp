@@ -27,6 +27,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   constructor(private appSrv: AppSrv, private af: AngularFire) {
 
+    this.af.database.list('/testItems', {query: {
+      orderByChild: 'weight'
+    }})
+    .subscribe((data: DayData[]) => {
+      const sorted = data.sort((a, b) => new Date(a.date) < new Date(b.date) ? 1 : 0);
+      console.log(sorted);
+    });
 
     af.auth.subscribe(auth => {
       console.log(auth);
@@ -92,7 +99,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   addDay() {
-    this.appSrv.addDay();
+    // this.appSrv.addDay();
+    this.appSrv.testPushData();
   }
 
   // ngOnChanges() {

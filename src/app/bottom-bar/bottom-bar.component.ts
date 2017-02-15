@@ -21,9 +21,11 @@ export class BottomBarComponent implements OnInit {
   //   debugger;
   // }
 
-  @Output() addDay() {
+  addDay() {
     this.onAddDay.emit();
   }
+
+
 
 
 }

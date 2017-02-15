@@ -1,14 +1,14 @@
 export class DayData {
-    date: Date;
+    date: string;
     cals?: number;
     weight?: number;
     isNew?: boolean = false;
 }
 
-export const createDate = (dayAdjust: number): Date => {
+export const createDate = (dayAdjust: number): string => {
   const date = new Date();
   date.setDate(date.getDate() + dayAdjust);
-  return date;
+  return date.toISOString();
 };
 
 export const testData: DayData[] = [

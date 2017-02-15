@@ -5,7 +5,7 @@ export const dateString = (date: Date) => `${date.getDate()}:${date.getMonth()}:
 
 export const dayString = (day: DayData) => `${day.weight}:
                                             ${day.cals}:
-                                            ${dateString(day.date)}`;
+                                            ${dateString(new Date(day.date))}`;
 
 @Injectable()
 export class DaysService {
@@ -32,13 +32,13 @@ export class DaysService {
       // While the current day does not match the next data point,
       // add days based on the last last data point is applicable,
       // otherwise the current one. 
-      while (!this.compareDates(today, data.date)) {
+      while (!this.compareDates(today, new Date(data.date))) {
         let newDay: DayData;
         if (!lastDay) { lastDay = data; }
         newDay = {
           weight: lastDay.weight,
           cals: lastDay.cals,
-          date: new Date(today)
+          date: new Date(today).toISOString()
         };
         rows = [...rows, newDay];
         today.setDate(today.getDate() - 1);

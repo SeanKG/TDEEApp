@@ -37,6 +37,12 @@ export class AppSrv {
     });
   }
 
+  testPushData() {
+    const testItems = this.af.database.list('/testItems');
+    testData.forEach(d => testItems.push(d));
+    // testItems.push(testData);
+  }
+
 
   dispatchChange() {
     this.appState$.next(this.appState);
@@ -44,11 +50,11 @@ export class AppSrv {
 
   addDay() {
     let lastDay = this.appState.days[this.appState.days.length - 1];
-    let{date}  = lastDay,
+    let date  = new Date(lastDay.date),
       {days} = this.appState;
     date.setDate(date.getDate() - 1);
     this.appState.days = [...days, {
-      date: new Date(date),
+      date: new Date(date).toISOString(),
       cals: lastDay.cals,
       weight: lastDay.weight,
       isNew: true
