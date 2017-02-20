@@ -1,3 +1,4 @@
+import { FirebaseAuthState } from 'angularfire2/auth';
 import { DaysService } from './days.service';
 import { AppState } from './types';
 import { Observable, Subject } from 'rxjs/Rx';
@@ -14,11 +15,27 @@ export class AppSrv {
 
   userDayLogs$: FirebaseListObservable<DayData[]>;
 
+  auth: FirebaseAuthState;
+
   constructor(daysSrv: DaysService, private af: AngularFire) {
     this.af.auth
       .switchMap((auth) => {
-        this.userDayLogs$ = this.af.database.list(`DayLogs/${auth.uid}`);
-        return auth ? this.userDayLogs$ : Observable.from([]);
+        this.auth = auth;
+        if (auth) {
+          this.userDayLogs$ = this.af.database.list(`DayLogs/${auth.uid}`, {
+            query: {
+              orderByChild: 'weight'
+            }
+          });
+          return this.userDayLogs$;
+        } else {
+          return Observable.from([]);
+        }
+      })
+      .map((data: DayData[]) => {
+        return data.sort((a, b) => {
+          return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+        }).reverse();
       })
       .subscribe((data: DayData[]) => {
         console.log(data);
@@ -52,23 +69,33 @@ export class AppSrv {
 
   addDay() {
     let lastDay = this.appState.days[this.appState.days.length - 1];
-    let date  = new Date(lastDay.date),
-      {days} = this.appState;
+    let date  = new Date(lastDay.date);
     date.setDate(date.getDate() - 1);
-    this.appState.days = [...days, {
+    // this.appState.days = [...days, ];
+
+    this.userDayLogs$.push({
       date: new Date(date).toISOString(),
       cals: lastDay.cals,
       weight: lastDay.weight,
       isNew: true
-    }];
-    this.calcAverages();
+    });
+    // this.calcAverages();
   }
 
   updateDay(newDay: DayData) {
-    const index = this.appState.days.findIndex(day => day.date === newDay.date);
-    this.appState.days[index].cals = newDay.cals;
-    this.appState.days[index].weight = newDay.weight;
-    this.calcAverages();
+
+    if (newDay.$key) {
+      this.userDayLogs$.update(newDay.$key, {weight: newDay.weight});
+    } else {
+      this.userDayLogs$.push(newDay);
+    }
+
+
+
+    // const index = this.appState.days.findIndex(day => day.date === newDay.date);
+    // this.appState.days[index].cals = newDay.cals;
+    // this.appState.days[index].weight = newDay.weight;
+    // this.calcAverages();
   }
 
   calcAverages() {

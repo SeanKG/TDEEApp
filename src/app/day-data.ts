@@ -3,6 +3,7 @@ export class DayData {
     cals?: number;
     weight?: number;
     isNew?: boolean = false;
+    $key?: string;
 }
 
 export const createDate = (dayAdjust: number): string => {

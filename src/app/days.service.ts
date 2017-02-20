@@ -33,8 +33,19 @@ export class DaysService {
       }];
     };
 
+    // make sure the data is sorted
+    const sortedUseData = userData.sort((a, b) => {
+      return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+    }).reverse();
+
+
     // Loop through the the exsting logs
-    userData.forEach(data => {
+    sortedUseData.forEach(data => {
+
+      if (rows.find(day => day.date === data.date)) {
+        console.log(data);
+        return rows;
+      }
       // While the current day does not match the next data point,
       // add days based on the last last data point is applicable,
       // otherwise the current one. 

@@ -3,16 +3,24 @@
     {{data.date | date:'dd'}}
 </div>
 <div class="inputs">
-    <input type="number"
-        #focusTarget 
+    <!--<input type="number"
         name="cals" 
         class="cals"
         [(ngModel)]="data.cals"
-        (blur)="onChanges($event)">
+        (blur)="onChanges($event)">-->
 
     <input type="number" 
+        #focusTarget 
         name="weight" 
         class="weight" 
         [(ngModel)]="data.weight"
         (blur)="onChanges($event)">
+
+    <md-icon *ngIf="!data.$key" 
+            (click)="save()"
+            [style.color]="iconColor">add_circle_outline</md-icon>
+    <md-icon *ngIf="data.$key" 
+            (click)="save()"
+            [style.color]="iconColor">check</md-icon>
+
 </div>
